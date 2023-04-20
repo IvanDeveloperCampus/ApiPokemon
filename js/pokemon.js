@@ -8,8 +8,8 @@ export default {
 
         //este es el mensaje que se envia
         ws.postMessage(urlPokemon);
+        ws.postMessage(urlPokemon)
         ws.addEventListener("message", (e) => {
-            
             info.innerHTML="";
             //OBTENEMOS LA INFORMACION PARA INYECTARLA
             info.insertAdjacentHTML("beforeend", e.data)

@@ -1,6 +1,6 @@
 
 //const buttons=document.querySelector(".buttons")
-let templateHtml = "";
+
 let btnNext;
 let btnPrev;
 
@@ -11,7 +11,7 @@ const getPokemon = async (url) => {
     const response = await fetch(url);
     const resultado = await response.json();
     //retornamos el array
-    
+
     return resultado;
 
 
@@ -23,6 +23,7 @@ const getPokemon = async (url) => {
 
 //2. OBETNEMOS LOS LINK DE CADA POKEMON PARA PODER ACCEDER A SUS DATOS
 const getPokemonIndividual = async (data) => {
+  let templateHtml = "";
   try {
     //iteramos por cada pokemon para sacar su url
     for (let item of data.results) {
@@ -48,12 +49,45 @@ const getPokemonIndividual = async (data) => {
 
 }
 
+const getPokemonByName = async (url) => {
+
+  let templateHtml2 = "";
+  try {
+    const response = await fetch(url);
+    const resultado = await response.json();
+    templateHtml2 += `<div class=" card" style="width: 15rem;">
+    <img src="${resultado.sprites.front_default}" class="" alt="">
+      <div class="card-body text-center">
+        <p class="card-text text-secondary">#${resultado.id}</p>
+        <p class="card-text">${resultado.name}</p>
+      </div>
+    </div>`
+    return templateHtml2;
+  }
+  catch (error) {
+    console.log(error);
+  }
+
+
+
+}
 
 
 
 self.addEventListener("message", async (e) => {
-  const resultado = await getPokemon(e.data);
-  const template = await getPokemonIndividual(resultado);
-  postMessage(template)
+
+  if (e.data.length > 36) {
+    const byName = await getPokemonByName(e.data);
+    console.log(byName);
+    postMessage(byName)
+  } else {
+    const resultado = await getPokemon(e.data);
+    const template = await getPokemonIndividual(resultado);
+
+    postMessage(template)
+  }
+
+
+
 
 })
