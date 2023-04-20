@@ -30,11 +30,36 @@ const getPokemonIndividual = async (data) => {
       const response = await fetch(item.url);
       const resultado = await response.json();
       templateHtml += `
-      <div class=" card" style="width: 15rem;">
-      <img src="${resultado.sprites.front_default}" class="" alt="">
-        <div class="card-body text-center">
-          <p class="card-text text-secondary">#${resultado.id}</p>
-          <p class="card-text">${resultado.name}</p>
+      <div class="pokemon-card">
+        <div class="pokemon-image">
+          <img src="${resultado.sprites.other.dream_world.front_default}" alt="Pikachu">
+        </div>
+        <div class="pokemon-info">
+          <h2 class="pokemon-name">${resultado.name}</h2>
+          <p class="pokemon-type">Tipo: <span>Eléctrico</span></p>
+          <div class="pokemon-stats">
+            <div class="pokemon-stat">
+              <div class="stat-name">Ataque</div>
+              <div class="stat-bar">
+                <div class="stat-progress" style="width:${resultado.stats[1].base_stat}%; background-color: #FFCB05;"></div>
+              </div>
+              <div class="stat-value">${resultado.stats[1].base_stat}</div>
+            </div>
+            <div class="pokemon-stat">
+              <div class="stat-name">Defensa</div>
+              <div class="stat-bar">
+                <div class="stat-progress" style="width: ${resultado.stats[2].base_stat}%; background-color: #FF3E3E;"></div>
+              </div>
+              <div class="stat-value">${resultado.stats[2].base_stat}</div>
+            </div>
+            <div class="pokemon-stat">
+              <div class="stat-name">Velocidad</div>
+              <div class="stat-bar">
+                <div class="stat-progress" style="width: ${resultado.stats[5].base_stat}%; background-color: #49D0B9;"></div>
+              </div>
+              <div class="stat-value">${resultado.stats[5].base_stat}</div>
+            </div>
+          </div>
         </div>
     </div>`
     }
@@ -55,13 +80,38 @@ const getPokemonByName = async (url) => {
   try {
     const response = await fetch(url);
     const resultado = await response.json();
-    templateHtml2 += `<div class=" card" style="width: 15rem;">
-    <img src="${resultado.sprites.front_default}" class="" alt="">
-      <div class="card-body text-center">
-        <p class="card-text text-secondary">#${resultado.id}</p>
-        <p class="card-text">${resultado.name}</p>
+    templateHtml2 += `<div class="pokemon-card">
+    <div class="pokemon-image">
+      <img src="${resultado.sprites.other.dream_world.front_default}" alt="Pikachu">
+    </div>
+    <div class="pokemon-info">
+      <h2 class="pokemon-name">${resultado.name}</h2>
+      <p class="pokemon-type">Tipo: <span>Eléctrico</span></p>
+      <div class="pokemon-stats">
+        <div class="pokemon-stat">
+          <div class="stat-name">Ataque</div>
+          <div class="stat-bar">
+            <div class="stat-progress" style="width:${resultado.stats[1].base_stat}%; background-color: #FFCB05;"></div>
+          </div>
+          <div class="stat-value">${resultado.stats[1].base_stat}</div>
+        </div>
+        <div class="pokemon-stat">
+          <div class="stat-name">Defensa</div>
+          <div class="stat-bar">
+            <div class="stat-progress" style="width: ${resultado.stats[2].base_stat}%; background-color: #FF3E3E;"></div>
+          </div>
+          <div class="stat-value">${resultado.stats[2].base_stat}</div>
+        </div>
+        <div class="pokemon-stat">
+          <div class="stat-name">Velocidad</div>
+          <div class="stat-bar">
+            <div class="stat-progress" style="width: ${resultado.stats[5].base_stat}%; background-color: #49D0B9;"></div>
+          </div>
+          <div class="stat-value">${resultado.stats[5].base_stat}</div>
+        </div>
       </div>
-    </div>`
+    </div>
+</div>`
     return templateHtml2;
   }
   catch (error) {
@@ -78,7 +128,6 @@ self.addEventListener("message", async (e) => {
 
   if (e.data.length > 34) {
     const byName = await getPokemonByName(e.data);
-    console.log(byName);
     postMessage(byName)
   } else {
     const resultado = await getPokemon(e.data);
