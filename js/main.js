@@ -8,7 +8,6 @@ pokemon.show(urlPokemon);
 addEventListener("click", (e)=>{
     if (e.target.classList.contains("btn")) {
         const url=e.target.getAttribute("url")
-       // console.log(url);
         pokemon.show(url)
 
     }
@@ -17,7 +16,6 @@ addEventListener("click", (e)=>{
 
 addEventListener("input", (e)=>{
     value=e.target.value
-    //console.log(urlPokemon+value);
     pokemon.show(urlPokemon+value)
 })
 

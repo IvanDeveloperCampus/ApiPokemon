@@ -76,7 +76,7 @@ const getPokemonByName = async (url) => {
 
 self.addEventListener("message", async (e) => {
 
-  if (e.data.length > 36) {
+  if (e.data.length > 34) {
     const byName = await getPokemonByName(e.data);
     console.log(byName);
     postMessage(byName)
