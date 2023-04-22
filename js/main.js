@@ -2,7 +2,11 @@ import pokemon from "./pokemon.js"
 
 let urlPokemon = `https://pokeapi.co/api/v2/pokemon/`;
 let value=""
-pokemon.show(urlPokemon);
+
+
+addEventListener("DOMContentLoaded", (e)=>{
+    pokemon.show(urlPokemon);
+})
 
 
 addEventListener("click", (e)=>{
@@ -14,9 +18,14 @@ addEventListener("click", (e)=>{
 })
 
 
-addEventListener("input", (e)=>{
-    value=e.target.value
-    pokemon.show(urlPokemon+value)
+const input=document.querySelector(".pokemon")
+addEventListener("click", (e)=>{
+    if (e.target.classList.contains("buscar")) {
+        const item=input.value
+        console.log(item);
+        pokemon.show(urlPokemon+item)
+    }
+  
 })
 
 
