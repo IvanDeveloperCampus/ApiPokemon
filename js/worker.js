@@ -36,7 +36,9 @@ const getPokemonIndividual = async (data) => {
 
 const getPokemonByName = async (url) => {
   let templateHtml2 = "";
-  let templateHtml3=""
+  let templateHtml3="";
+  let descripcionEs;
+
   try {
     const response = await fetch(url);
     const resultado = await response.json();
@@ -62,16 +64,17 @@ const getPokemonByName = async (url) => {
             const response2=await fetch(resultado.species.url);
             const pokemonSpecies=await response2.json();
             let drescripciones=pokemonSpecies.flavor_text_entries;
-            let descripcionEs=drescripciones.filter((des)=>des.language.name==="es");
-            console.log(descripcionEs);
+            descripcionEs=drescripciones.filter((des)=>des.language.name==="es");
+            
           } catch (error) { 
             console.log(error);
           }
           return {
             templateHtml2: templateHtml2,
             templateHtml3: templateHtml3,
+            descripcionEs: descripcionEs
           };
-  } catch (error) {
+  } catch (error) { 
     console.log(error);
   }
 

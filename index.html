@@ -11,6 +11,7 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css" rel="stylesheet">
     <title>Document</title>
   </head>
   <body>
@@ -18,17 +19,7 @@
       <h1 class="h1">POKEMON</h1>
     </div>
 
-    <div class="container">
-      <form action="" class="row" id="buscador">
-        <input
-          type="text"
-          class="form-control item"
-          name="item"
-          placeholder="Nombre del Pokemon"
-        />
-        <input type="submit" value="Buscar" class="btn btn-info" />
-      </form>
-    </div>
+    
     <div class="container cardss mt-5"></div>
 
     <div class="buttons text-center mt-5"></div>
@@ -69,10 +60,10 @@
       
         <div class="bottom-modes">
           
-            <button class="level-button  reproducir text-white">Reproducir</button>
-            <button class="level-button stop text-white">Stop</button>
-            <button class="level-button  close text-white">Close</button>
-            <button class="level-button"></button>
+            <button class="level-button  reproducir text-white"><i class="bi bi-play-fill"></i></button>
+            <button class="level-button pause text-white"><i class="bi bi-stop-fill"></i></button>
+            <button class="level-button  close text-white"><i class="bi bi-x"></i></button>
+      
           
             <button class="pokedex-mode black-button buscar">Buscar</button>
             <button class="game-mode black-button">Cerrar</button>
