@@ -9,7 +9,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  height: 600px;
 }
 
 .titulo img{
@@ -133,14 +133,22 @@ body {
   cursor: pointer;
 }
 
+.paginacion{
+  margin-top: -2rem;
+}
 
-#pag span button{
-  font-size: 20px;
+.paginacion span button{
+  font-size: 18px;
   padding: 0 2px;
   background-color: #ffffff00;
-  border: 1;
+  border: 0;
   cursor: pointer;
   margin: 0 2px;
+}
+
+
+.paginacion span:hover{
+  background-color: #2B6FB6;
 }
 
 /*=====POKEDEXX===================*/
@@ -210,6 +218,25 @@ body {
   float: left;
   margin-left: 25px;
   border: 3px solid white;
+}
+
+#sensor-button.pulsing {
+  background-color: red;
+  animation: pulse 0.3s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .botom-actions {

@@ -2,7 +2,7 @@
 
 
 let count=0
-let perPage=80;
+let perPage=40;
 
 //1. PRIMERO OBTENEMOS LOS POKEMONES RESULTADOS PAGINADO
 const getPokemon = async (url) => {
@@ -46,6 +46,8 @@ const getPokemonByName = async (url) => {
   try {
     const response = await fetch(url);
     const resultado = await response.json();
+    const abilities = resultado.abilities;
+    //console.log(abilities[0].ability.name);
     templateHtml2+=`
     <img src="${resultado.sprites.other.dream_world.front_default}"/>
           
@@ -54,8 +56,8 @@ const getPokemonByName = async (url) => {
            <h2>${resultado.name}</h2>
           <h3>Abilities</h3>
           <ul>
-            <li>Solar-power</li>
-            <li>Blaze</li>
+            <li>${abilities[0].ability.name}</li>
+
           </ul>
           <h3>Moves</h3>
           <ul>
@@ -126,9 +128,11 @@ const template = (resultado) => {
 const addNumber=()=>{
   let plantillaHTML3=""
   const page=count/perPage;
+  plantillaHTML3+=`<span><button><i class="bi bi-chevron-left"></i></button></span>`
   for (let index = 1; index < page; index++) {
     plantillaHTML3+=`<span><button class="btnP" value="${index}">${index}</button></span>`   
   }
+  plantillaHTML3+=`<span><button><i class="bi bi-chevron-right"></i></button></span>`
   return plantillaHTML3
 }
 

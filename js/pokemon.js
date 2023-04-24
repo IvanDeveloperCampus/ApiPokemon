@@ -11,6 +11,7 @@ const pokedexSpeak = (detail, detail2, detail3) => {
   //establecemos propiedades
   utterance.text = phrase;
   utterance.rate = 1.2;
+  utterance.lang = "es-ES";
 
   //verificamos si hay una instancia,
   //si es asi cancelamos antes de reproducir la nueva voz
@@ -24,6 +25,8 @@ const pokedexSpeak = (detail, detail2, detail3) => {
 };
 
 const show = (urlPokemon) => {
+
+const button = document.getElementById('sensor-button');
   const info = document.querySelector(".cardss");
   const imgpokedex = document.querySelector(".camera-display");
   const infoPokemon = document.querySelector(".stats-display");
@@ -64,6 +67,7 @@ const show = (urlPokemon) => {
         descripcionEs[1].flavor_text.replace(/\n/g, " "),
         descripcionEs[2].flavor_text.replace(/\n/g, " ")
       );
+      button.classList.add('pulsing');
     } else {
       
       if (e.data.length<2000) {
@@ -75,6 +79,8 @@ const show = (urlPokemon) => {
       }
       
     }
+
+   
   });
 };
 

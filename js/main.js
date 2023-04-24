@@ -5,7 +5,7 @@ let urlPokemon = `https://pokeapi.co/api/v2/pokemon?`;
 
 
 addEventListener("DOMContentLoaded", (e) => {
-  pokemon.show(`${urlPokemon}offset=0&limit=40`);
+  pokemon.show(`${urlPokemon}offset=0&limit=20`);
 });
 
 addEventListener("click", (e) => {
@@ -25,28 +25,37 @@ addEventListener("click", (e) => {
   }
 });
 
+const button = document.getElementById('sensor-button');
 const playButton = document.querySelector(".reproducir");
 const pauseButton = document.querySelector(".pause");
 const stopButton = document.querySelector(".close");
 
 playButton.addEventListener("click", () => {
+  button.classList.add('pulsing');
   pokemon.playAudio();
+  
 });
 
 pauseButton.addEventListener("click", () => {
   pokemon.pauseAudio();
+  button.classList.remove('pulsing');
 });
 
 stopButton.addEventListener("click", () => {
   pokemon.stopAudio();
+  button.classList.remove('pulsing');
 });
+
+
+
 
 
 
 addEventListener("click", (e)=>{
  if (e.target.classList.contains("btnP")) {
       const valor=e.target.value
-      pokemon.show(`${urlPokemon}offset=${valor*80}&limit=80`);
+      console.log(valor);
+      pokemon.show(`${urlPokemon}offset=${valor*20}&limit=20`);
   
  }
 })
