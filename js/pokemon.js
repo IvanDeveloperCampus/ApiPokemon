@@ -48,7 +48,6 @@ const showOne = (url) => {
   ws2.postMessage(url);
   let contPokemon = 0;
   ws2.addEventListener("message", (e) => {
-    console.log(contPokemon);
     const { templateHtml2, templateHtml3, descripcionEs } = e.data;
     if (contPokemon === 0) {
       imgpokedex.innerHTML = "";
@@ -56,7 +55,7 @@ const showOne = (url) => {
         "beforeend",
         templateHtml2
       );
-      
+      contPokemon++;
     }
 
     if (contPokemon === 1) {
@@ -65,7 +64,7 @@ const showOne = (url) => {
         "beforeend",
         templateHtml3
       );
-      
+      contPokemon++;
     }
 
     pokedexSpeak(
@@ -74,9 +73,10 @@ const showOne = (url) => {
       descripcionEs[2].flavor_text.replace(/\n/g, " ")
     );
     button.classList.add("pulsing");
+  
   });
 
-    selectoresPokemon.length - 1 == contPokemon ? ws.terminate : contPokemon++;
+   
 };
 
 function playAudio() {
