@@ -25,7 +25,7 @@ const pokedexSpeak = (detail, detail2, detail3) => {
 const showAll = (urlPokemon) => {
   let selectores = [".cardss", ".paginacion"];
   let cont = 0;
-  const ws = new Worker("../js/workers/workerAll.js");
+  const ws = new Worker("js/workers/workerAll.js");
 
   //este es el mensaje que se envia
   ws.postMessage(urlPokemon);
@@ -44,7 +44,7 @@ const showOne = (url) => {
   const imgpokedex = document.querySelector(".camera-display");
   const infoPokemon = document.querySelector(".stats-display");
   let selectoresPokemon = [imgpokedex, infoPokemon];
-  const ws2 = new Worker("../js/workers/workerOne.js");
+  const ws2 = new Worker("js/workers/workerOne.js");
   ws2.postMessage(url);
   let contPokemon = 0;
   ws2.addEventListener("message", (e) => {

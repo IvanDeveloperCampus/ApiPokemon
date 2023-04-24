@@ -19,6 +19,7 @@ addEventListener("click", (e) => {
   }
 });
 
+
 addEventListener("click", (e)=>{
   if (e.target.classList.contains("btnP")) {
        const valor=e.target.value
