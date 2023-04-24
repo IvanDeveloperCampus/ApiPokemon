@@ -29,6 +29,10 @@ const button = document.getElementById('sensor-button');
 const playButton = document.querySelector(".reproducir");
 const pauseButton = document.querySelector(".pause");
 const stopButton = document.querySelector(".close");
+const myModal=document.querySelector("#exampleModal")
+
+
+
 
 playButton.addEventListener("click", () => {
   button.classList.add('pulsing');
@@ -45,8 +49,6 @@ stopButton.addEventListener("click", () => {
   pokemon.stopAudio();
   button.classList.remove('pulsing');
 });
-
-
 
 
 
