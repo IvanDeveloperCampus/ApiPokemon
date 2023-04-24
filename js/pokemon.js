@@ -1,37 +1,38 @@
 
-
-const synth = window.speechSynthesis;
-const utterance = new SpeechSynthesisUtterance();//instancia de la voz
+const synth = window.speechSynthesis; // synth hace referencia al objeto speechSynthesis, que es una interfaz que permite acceder y controlar la síntesis de voz del navegador.
+const utterance = new SpeechSynthesisUtterance(); //una instancia que contiene la información del texto a sintetizar y las características de la voz que se utilizará para sintetizar el habla.
 
 const pokedexSpeak = (detail, detail2, detail3) => {
+ 
   const phrase = `
       ${detail}, ${detail2}, ${detail3}
     `;
 
-   //establecemos propiedades 
+  //establecemos propiedades
   utterance.text = phrase;
   utterance.rate = 1.2;
 
-  //verificamos si hay una instancia, 
+  //verificamos si hay una instancia,
   //si es asi cancelamos antes de reproducir la nueva voz
   if (synth.speaking) {
     synth.cancel();
     synth.speak(utterance);
   }
 
+  //reproducimos
   synth.speak(utterance);
-
 };
 
 const show = (urlPokemon) => {
   const info = document.querySelector(".cardss");
   const imgpokedex = document.querySelector(".camera-display");
   const infoPokemon = document.querySelector(".stats-display");
+  const paginacion = document.querySelector(".paginacion");
 
   const ws = new Worker("./js/worker.js");
 
-  let cont = 0;
-  let selectores = [imgpokedex, infoPokemon];
+  let contPokemon = 0;
+  let selectoresPokemon = [imgpokedex, infoPokemon];
 
   //este es el mensaje que se envia
   ws.postMessage(urlPokemon);
@@ -40,16 +41,22 @@ const show = (urlPokemon) => {
     //OBTENEMOS LA INFORMACION PARA INYECTARLA
     if (typeof e.data == "object") {
       const { templateHtml2, templateHtml3, descripcionEs } = e.data;
-      if (cont === 0) {
+      if (contPokemon === 0) {
         imgpokedex.innerHTML = "";
-        selectores[cont].insertAdjacentHTML("beforeend", templateHtml2);
-        cont++;
+        selectoresPokemon[contPokemon].insertAdjacentHTML(
+          "beforeend",
+          templateHtml2
+        );
+        contPokemon++;
       }
 
-      if (cont === 1) {
+      if (contPokemon === 1) {
         infoPokemon.innerHTML = "";
-        selectores[cont].insertAdjacentHTML("beforeend", templateHtml3);
-        cont++;
+        selectoresPokemon[contPokemon].insertAdjacentHTML(
+          "beforeend",
+          templateHtml3
+        );
+        contPokemon++;
       }
 
       pokedexSpeak(
@@ -58,23 +65,25 @@ const show = (urlPokemon) => {
         descripcionEs[2].flavor_text.replace(/\n/g, " ")
       );
     } else {
-      info.innerHTML = "";
-
-      info.insertAdjacentHTML("beforeend", e.data);
+      
+      if (e.data.length<2000) {
+        paginacion.innerHTML=""
+        paginacion.insertAdjacentHTML("beforeend", e.data)
+      }else{
+        info.innerHTML = "";
+        info.insertAdjacentHTML("beforeend", e.data);
+      }
+      
     }
   });
 };
 
-
-
 function playAudio() {
-
   if (synth.speaking) {
     console.log("playy");
     synth.resume();
   }
 }
-
 
 function pauseAudio() {
   console.log("pausaaaa");
@@ -82,8 +91,8 @@ function pauseAudio() {
 }
 
 function stopAudio() {
- console.log("stop");
- synth.cancel();
+  console.log("stop");
+  synth.cancel();
 }
 
 export default { show, playAudio, pauseAudio, stopAudio };

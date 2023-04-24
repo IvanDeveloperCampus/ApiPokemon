@@ -1,15 +1,14 @@
 //const buttons=document.querySelector(".buttons")
 
-let btnNext;
-let btnPrev;
+
+let count=0
+let perPage=80;
 
 //1. PRIMERO OBTENEMOS LOS POKEMONES RESULTADOS PAGINADO
 const getPokemon = async (url) => {
   try {
     const response = await fetch(url);
     const resultado = await response.json();
-    //retornamos el array
-
     return resultado;
   } catch (error) {
     console.error(error);
@@ -20,6 +19,11 @@ const getPokemon = async (url) => {
 const getPokemonIndividual = async (data) => {
   let templateHtml = "";
   try {
+
+  
+    count=data.count
+    ///console.log(addNumber());
+    ///addNumber()
     //iteramos por cada pokemon para sacar su url
 
     for (let item of data.results) {
@@ -87,7 +91,7 @@ const getPokemonByName = async (url) => {
 const template = (resultado) => {
   return `<div class="pokemon-card">
   <div class="pokemon-image">
-    <img src="${resultado.sprites.other.dream_world.front_default}" alt="Pikachu">
+    <img src="${resultado.sprites.other.home.front_default}" alt="Pikachu">
   </div>
   <div class="pokemon-info">
     <h2 class="pokemon-name">${resultado.name}</h2>
@@ -119,8 +123,22 @@ const template = (resultado) => {
 </div>`;
 };
 
+const addNumber=()=>{
+  let plantillaHTML3=""
+  const page=count/perPage;
+  for (let index = 1; index < page; index++) {
+    plantillaHTML3+=`<span><button class="btnP" value="${index}">${index}</button></span>`   
+  }
+  return plantillaHTML3
+}
+
+
+
+
+
+
 self.addEventListener("message", async (e) => {
-  if (e.data.length > 34) {
+  if (e.data.length < 51) {
     const byName = await getPokemonByName(e.data);
     postMessage(byName);
   } else {
@@ -129,4 +147,7 @@ self.addEventListener("message", async (e) => {
 
     postMessage(template);
   }
+
+  const pagination=addNumber();
+  postMessage(pagination)
 });

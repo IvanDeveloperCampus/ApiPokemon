@@ -4,32 +4,28 @@ body {
   }
 
 .titulo{
-    font-size: 6rem;
-    text-align: center;
-    color: #E64C3C;
-    text-shadow: 2px 2px #F5A9A9;
-    margin-top: 5rem;
-    margin-bottom: 5rem;
+  background-color: #CEF6D6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
 }
 
-.titulo h1{
-    font-size: 10rem;
+.titulo img{
+  margin-top: -5rem;
+  width: 50%;
+}
+
+.paginacion{
+  margin-top: 2rem;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  border: 0;
 }
 
 
-.titulo:before {
-    content: "";
-    position: absolute;
-    top:    -10px;
-    left:   -10px;
-    right:  -10px;
-    bottom: -10px;
-    background-color: #a4d4f5;
-    border-radius: 100%;
-    z-index: -1;
-  }
-
-  
 .cardss{
     display: flex;
     flex-wrap: wrap;
@@ -38,7 +34,7 @@ body {
 
 .pokemon-card {
     width: 300px;
-    background-color: #fff;
+    background-color: #97979721;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -135,6 +131,16 @@ body {
   border: none;
   outline: none;
   cursor: pointer;
+}
+
+
+#pag span button{
+  font-size: 20px;
+  padding: 0 2px;
+  background-color: #ffffff00;
+  border: 1;
+  cursor: pointer;
+  margin: 0 2px;
 }
 
 /*=====POKEDEXX===================*/
