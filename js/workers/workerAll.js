@@ -1,13 +1,14 @@
 
 
 
-
 //1. PRIMERO OBTENEMOS LOS POKEMONES RESULTADOS PAGINADO
-const getPokemon = async (url) => {
+const getPokemon = async (valor) => {
   try {
-    const response = await fetch(url);
+    const value=(valor*20)
+    console.log(value);
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${value}&limit=20`);
     const resultado = await response.json();
-    return resultado;
+    return getPokemonIndividual(resultado)
   } catch (error) {
     console.error(error);
   }
@@ -84,9 +85,9 @@ const addNumber=()=>{
 
 
 
-self.addEventListener("message", async (e) => {
-    const resultado = await getPokemon(e.data);
-    const template = await getPokemonIndividual(resultado);
-    postMessage(template);
+self.addEventListener("message", async(e) => {
+  
+   const resultado = await getPokemon(e.data);
+    postMessage(resultado);
     addNumber();
 });

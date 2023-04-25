@@ -1,10 +1,10 @@
-const getPokemonByName = async (url) => {
+const getPokemonByName = async (val) => {
   let templateHtml2 = "";
   let templateHtml3 = "";
   let descripcionEs;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${val}`);
     const resultado = await response.json();
     const abilities = resultado.abilities;
     //console.log(abilities[0].ability.name);
