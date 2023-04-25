@@ -120,7 +120,7 @@ body {
   
   .poke{
     bottom: 20px;
-    right: 20px;
+    right: 30px;
     width: 80px;
 }
 
@@ -133,24 +133,36 @@ body {
   border: none;
   outline: none;
   cursor: pointer;
+  background-color: transparent;
 }
 
 .paginacion{
+  display: flex;
+  flex-wrap: wrap;
   margin-top: -2rem;
 }
 
 .paginacion span button{
-  font-size: 18px;
-  padding: 0 2px;
-  background-color: #ffffff00;
-  border: 0;
-  cursor: pointer;
-  margin: 0 2px;
+ background: #ECECEC;
+ width: 42px;
+ border-radius: 50%;
+ cursor: pointer;
+ border: 0;
 }
 
 
-.paginacion span:hover{
-  background-color: #2B6FB6;
+.paginacion span button:hover{
+  background-color: #C8FFCD;
+}
+
+.paginacion span button.active{
+  background-color: #2C6FB6;
+}
+
+.paginacion .btnE{
+  width: 60px;
+  background-color: #2C6FB6;
+  color: white;
 }
 
 /*=====POKEDEXX===================*/

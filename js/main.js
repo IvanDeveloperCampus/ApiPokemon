@@ -1,7 +1,6 @@
 import pokemon from "./pokemon.js";
 import pokedex from "./pokedex.js";
 
-
 let valor = 0;
 
 addEventListener("DOMContentLoaded", (e) => {
@@ -26,4 +25,8 @@ addEventListener("click", (e) => {
   }
 });
 
-
+addEventListener("click", (e) => {
+  if (e.target.classList.contains("btnP")) {
+    e.target.classList.toggle("active");
+  }
+});
