@@ -14,21 +14,32 @@ const getPokemon = async (valor) => {
   }
 };
 
+
 //2. OBETNEMOS LOS LINK DE CADA POKEMON PARA PODER ACCEDER A SUS DATOS
+/*uso de Promise.all para enviar múltiples solicitudes a la API al mismo tiempo. 
+Esto significa que, en lugar de esperar que se complete
+ una solicitud antes de enviar la siguiente, se envían varias solicitudes al mismo 
+ tiempo y se espera a que todas las solicitudes se completen antes de continuar con el código.*/
+
 const getPokemonIndividual = async (data) => {
-  let templateHtml = "";
-  try {
+  let promises = [];
 
-    for (let item of data.results) {
-      const response = await fetch(item.url);
-      const resultado = await response.json();
-      templateHtml += template(resultado);
-    }
+  for (let item of data.results) {
+    const promise = fetch(item.url)
+      .then(response => response.json())
+      .catch(error => console.error(error));
 
-    return templateHtml;
-  } catch (error) {
-    console.log(error);
+    promises.push(promise);
   }
+
+  const resultados = await Promise.all(promises);
+  let templateHtml = "";
+
+  resultados.forEach(resultado => {
+    templateHtml += template(resultado);
+  });
+
+  return templateHtml;
 };
 
 
